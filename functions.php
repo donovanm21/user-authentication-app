@@ -2,7 +2,7 @@
 session_start();
 
 // connect to database
-$db = mysqli_connect('db.ydev.co.za', 'userauth', 'xS5DO4H8lzow0iYw', 'user_auth_app');
+$db = mysqli_connect('localhost', 'root', 'root', 'user_auth_app');
 
 // variable declaration
 $username = "";
