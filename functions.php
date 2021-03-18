@@ -1,8 +1,14 @@
 <?php 
 session_start();
 
+// Database Host Details
+$DBSERVER = 'localhost';
+$DBUSER = 'root';
+$DBPASS = 'root';
+$DBNAME = 'user_auth_app';
+
 // connect to database
-$db = mysqli_connect('localhost', 'root', 'root', 'user_auth_app');
+$db = mysqli_connect($DBHOST, $DBUSER, $DBPASS, $DBNAME);
 
 // variable declaration
 $username = "";
