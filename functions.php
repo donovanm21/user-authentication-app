@@ -173,13 +173,37 @@ function query($sql) {
 	return $rows;
 }
 
+$book_search_input = '';
+
+if (isset($_POST['book_search'])) {
+	$book_search_input = $_POST['book_search_input'];
+}
+
 function getBooks() {
-	$sql = 'SELECT books.book_name, books.year, books.genre, books.age_group, authors.author_name
-	FROM books
-	INNER JOIN authors
-	ON books.author_id = authors.author_id;';
-	$books = query($sql);
-	if($books){
-		return $books;
+	global $book_search_input;
+	if ($book_search_input != '') {
+		$sql = 'SELECT books.book_name, books.year, books.genre, books.age_group, authors.author_name
+		FROM books 
+		INNER JOIN authors
+		ON books.author_id = authors.author_id 
+		WHERE books.book_name LIKE "%'.$book_search_input.'%"
+		OR books.year LIKE "%'.$book_search_input.'%"
+		OR books.genre LIKE "%'.$book_search_input.'%"
+		OR books.age_group LIKE "%'.$book_search_input.'%"
+		OR authors.author_name LIKE "%'.$book_search_input.'%";';
+		$books = query($sql);
+		if($books){
+			return $books;
+		}
+	} else {
+		$sql = 'SELECT books.book_name, books.year, books.genre, books.age_group, authors.author_name
+		FROM books
+		INNER JOIN authors
+		ON books.author_id = authors.author_id;';
+		$books = query($sql);
+		if($books){
+			return $books;
+		}
 	}
 }
+
