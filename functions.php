@@ -1,14 +1,6 @@
 <?php 
 session_start();
-
-// Database Host Details
-$DBSERVER = 'localhost';
-$DBUSER = 'root';
-$DBPASS = 'root';
-$DBNAME = 'user_auth_app';
-
-// connect to database
-$db = mysqli_connect($DBHOST, $DBUSER, $DBPASS, $DBNAME);
+require('config.php');
 
 // variable declaration
 $username = "";
@@ -23,7 +15,7 @@ if (isset($_POST['register_btn'])) {
 // REGISTER USER
 function register(){
 	// call these variables with the global keyword to make them available in function
-	global $db, $errors, $username, $email;
+	global $mysqli, $errors, $username, $email;
 
 	// receive all input values from the form. Call the e() function
     // defined below to escape form values
@@ -54,16 +46,16 @@ function register(){
 			$user_type = e($_POST['user_type']);
 			$query = "INSERT INTO users (username, email, user_type, password) 
 					  VALUES('$username', '$email', '$user_type', '$password')";
-			mysqli_query($db, $query);
+			mysqli_query($mysqli, $query);
 			$_SESSION['success']  = "New user successfully created!!";
 			header('location: home.php');
 		}else{
 			$query = "INSERT INTO users (username, email, user_type, password) 
 					  VALUES('$username', '$email', 'user', '$password')";
-			mysqli_query($db, $query);
+			mysqli_query($mysqli, $query);
 
 			// get id of the created user
-			$logged_in_user_id = mysqli_insert_id($db);
+			$logged_in_user_id = mysqli_insert_id($mysqli);
 
 			$_SESSION['user'] = getUserById($logged_in_user_id); // put logged in user in session
 			$_SESSION['success']  = "You are now logged in";
@@ -74,9 +66,9 @@ function register(){
 
 // return user array from their id
 function getUserById($id){
-	global $db;
+	global $mysqli;
 	$query = "SELECT * FROM users WHERE id=" . $id;
-	$result = mysqli_query($db, $query);
+	$result = mysqli_query($mysqli, $query);
 
 	$user = mysqli_fetch_assoc($result);
 	return $user;
@@ -84,19 +76,20 @@ function getUserById($id){
 
 // escape string
 function e($val){
-	global $db;
-	return mysqli_real_escape_string($db, trim($val));
+	global $mysqli;
+	return mysqli_real_escape_string($mysqli, trim($val));
 }
 
 function display_error() {
 	global $errors;
 
 	if (count($errors) > 0){
-		echo '<div class="error">';
+		echo '<p class="text-danger mt-2"><b>Please correct the following error(s):</b></p>';
+		echo '<ul>';
 			foreach ($errors as $error){
-				echo $error .'<br>';
+				echo '<li class="text-danger text-start">'.$error.'</li>';
 			}
-		echo '</div>';
+		echo '</ul>';
 	}
 }
 function isLoggedIn()
@@ -120,7 +113,7 @@ if (isset($_POST['login_btn'])) {
 
 // LOGIN USER
 function login(){
-	global $db, $username, $errors;
+	global $mysqli, $username, $errors;
 
 	// grap form values
 	$username = e($_POST['username']);
@@ -139,7 +132,7 @@ function login(){
 		$password = md5($password);
 
 		$query = "SELECT * FROM users WHERE username='$username' AND password='$password' LIMIT 1";
-		$results = mysqli_query($db, $query);
+		$results = mysqli_query($mysqli, $query);
 
 		if (mysqli_num_rows($results) == 1) { // user found
 			// check if user is admin or user
@@ -160,11 +153,33 @@ function login(){
 		}
 	}
 }
-function isAdmin()
-{
+function isAdmin() {
 	if (isset($_SESSION['user']) && $_SESSION['user']['user_type'] == 'admin' ) {
 		return true;
 	}else{
 		return false;
+	}
+}
+
+function query($sql) {
+	global $mysqli;
+	$results = mysqli_query($mysqli, $sql);
+	$rows = array();
+	if(!is_bool($results)){
+		while($row = mysqli_fetch_assoc($results)){
+			$rows[] = $row;
+		}
+	}
+	return $rows;
+}
+
+function getBooks() {
+	$sql = 'SELECT books.book_name, books.year, books.genre, books.age_group, authors.author_name
+	FROM books
+	INNER JOIN authors
+	ON books.author_id = authors.author_id;';
+	$books = query($sql);
+	if($books){
+		return $books;
 	}
 }
