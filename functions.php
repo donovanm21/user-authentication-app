@@ -74,6 +74,15 @@ function getUserById($id){
 	return $user;
 }
 
+// return user array
+function getMembers(){
+	global $mysqli;
+	$query = "SELECT * FROM users";
+	$result = query($query);
+
+	return $result;
+}
+
 // escape string
 function e($val){
 	global $mysqli;

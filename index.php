@@ -23,7 +23,7 @@
 <body>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.php">Public Library</a>
+            <a class="navbar-brand" href="index.php"><img src="includes/img/logo.svg" height="35"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -32,9 +32,11 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                     </li>
+                    <?php if(isAdmin()) { ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Members</a>
+                        <a class="nav-link" href="member.php">Members</a>
                     </li>
+                    <?php }; ?>
                     <li class="nav-item text-nowrap">
                         <a class="nav-link" href="index.php?logout='1'">Sign out</a>
                     </li>

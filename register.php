@@ -15,6 +15,7 @@
     </head>
     <body class="text-center">
         <main class="form-signin">
+        <img class="mb-4" src="includes/img/logo.svg" alt="" width="120">
         <form method="post" action="register.php">
             <h1 class="h3 mb-3 fw-normal">Please Register</h1>
             <div>

@@ -16,6 +16,7 @@
     <body class="text-center">
         <main class="form-signin">
         <form method="post" action="login.php">
+            <img class="mb-4" src="includes/img/logo.svg" alt="" width="120">
             <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
             <label for="username" class="visually-hidden">Email address</label>
             <input type="text" id="username" class="form-control topinput" placeholder="Username" name="username">
