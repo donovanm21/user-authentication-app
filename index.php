@@ -60,6 +60,7 @@
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="book_search_input">
                         <button class="btn btn-outline-success" type="submit" name="book_search">Search</button>
                     </form>
+                    <button class="mx-2 btn btn-outline-primary" type="button" name="book_add">Add</button>
                 </div>
             </div>
             <!-- Books Table -->

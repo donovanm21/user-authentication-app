@@ -76,11 +76,11 @@ if(!isAdmin()) {
                         </div>
                         <div class="form-item">
                             <label class="mt-2">Password</label>
-                            <input type="password" name="password" class="w-100 mt-2 p-1" value="<?php echo $password; ?>">
+                            <input type="password" name="password_1" class="w-100 mt-2 p-1" value="<?php echo $password_1; ?>">
                         </div>
                         <div class="form-item">
                             <label class="mt-2">Confirm Password</label>
-                            <input type="password" name="confirm_password" class="w-100 mt-2 p-1" value="<?php echo $confirm_password; ?>">
+                            <input type="password" name="password_2" class="w-100 mt-2 p-1" value="<?php echo $password_2; ?>">
                         </div>
                         <div class="form-item">
                             <input type="submit" class="w-100 mt-3 btn btn-primary" name="register_btn" value="Submit">

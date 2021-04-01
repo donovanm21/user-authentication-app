@@ -193,9 +193,9 @@ function getBooks() {
 	if ($book_search_input != '') {
 		if($_SESSION['user']['user_type'] == 'admin'){
 			$sql = 'SELECT books.book_name, books.year, books.genre, books.age_group, authors.author_name
-			FROM books 
+			FROM books
 			INNER JOIN authors
-			ON books.author_id = authors.author_id 
+			ON books.author_id = authors.author_id
 			WHERE books.book_name LIKE "%'.$book_search_input.'%"
 			OR books.year LIKE "%'.$book_search_input.'%"
 			OR books.genre LIKE "%'.$book_search_input.'%"
@@ -207,9 +207,9 @@ function getBooks() {
 			}
 		} else {
 			$sql = 'SELECT books.book_name, books.year, books.genre, books.age_group, authors.author_name
-			FROM books 
+			FROM books
 			INNER JOIN authors
-			ON books.author_id = authors.author_id 
+			ON books.author_id = authors.author_id
 			WHERE books.book_name LIKE "%'.$book_search_input.'%"
 			OR books.year LIKE "%'.$book_search_input.'%"
 			OR books.genre LIKE "%'.$book_search_input.'%"
