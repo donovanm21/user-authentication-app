@@ -95,7 +95,9 @@ if(!isAdmin()) {
                         <tr>
                             <th scope="col">Username</th>
                             <th scope="col">Email</th>
+                            <th scope="col">Type</th>
                             <th scope="col">Last Login</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -103,7 +105,9 @@ if(!isAdmin()) {
                         <tr>
                             <td><?php echo $acc['username']; ?></td>
                             <th scope="row"><?php echo $acc['email']; ?></th>
+                            <td><?php echo $acc['user_type']; ?></td>
                             <td><?php echo $acc['timestamp']; ?></td>
+                            <td><a href="delete_member.php?id=<?php echo $acc['id']; ?>" onclick="return confirm('Are you sure?')">D</a></td>
                         </tr>
                     <?php }; ?>
                     </tbody>
