@@ -9,9 +9,8 @@ if (!isLoggedIn()) {
 
 if(isset($_GET['id'])) {
     $sql = 'DELETE FROM books WHERE book_id = "'.$_GET['id'].'"';
-
     query($sql);
-	header("location: index.php");
+    header("location: index.php");
 }
 
 ?>

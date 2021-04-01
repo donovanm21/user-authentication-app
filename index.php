@@ -93,7 +93,7 @@
                         <tr>
                             <td>
                             <?php if(isAdmin()) { ?>
-                                <a href="delete_book.php?id=<?php echo $book['book_id']; ?>">D</a>
+                                <a href="delete_book.php?id=<?php echo $book['book_id']; ?>" onclick="return confirm('Are you sure you want to delete this?')">D</a>
                             <?php }; ?>
                             </td>
                             <td><?php echo $book['book_name']; ?></td>
