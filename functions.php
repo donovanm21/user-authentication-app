@@ -230,4 +230,22 @@ function getBooks() {
 		}
 	}
 }
+// Add Book Function
+function addBook($book_name, $book_year, $book_genre, $age_group, $author_name, $author_age, $author_genre) {
+	$sql = '';
 
+	query($sql);
+	header("location: index.php");
+}
+// Sort books function
+function sortBooks($input) {
+	$sql = 'SELECT books.book_name, books.year, books.genre, books.age_group, authors.author_name
+		FROM books
+		INNER JOIN authors
+		ON books.author_id = authors.author_id
+		SORT BY "'.$input.'" DESC;';
+		$books = query($sql);
+		if($books){
+			return $books;
+		}
+}
