@@ -220,7 +220,7 @@ function getBooks() {
 			}
 		}
 	} else {
-		$sql = 'SELECT books.book_name, books.year, books.genre, books.age_group, authors.author_name
+		$sql = 'SELECT books.book_id, books.book_name, books.year, books.genre, books.age_group, authors.author_name
 		FROM books
 		INNER JOIN authors
 		ON books.author_id = authors.author_id;';
@@ -239,7 +239,7 @@ function addBook($book_name, $book_year, $book_genre, $age_group, $author_name, 
 }
 // Sort books function
 function sortBooks($input) {
-	$sql = 'SELECT books.book_name, books.year, books.genre, books.age_group, authors.author_name
+	$sql = 'SELECT books.book_id, books.book_name, books.year, books.genre, books.age_group, authors.author_name
 		FROM books
 		INNER JOIN authors
 		ON books.author_id = authors.author_id

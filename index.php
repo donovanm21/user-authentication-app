@@ -80,6 +80,7 @@
                 <table class="table table-striped table-sm">
                     <thead>
                         <tr>
+                            <th></th>
                             <th><a href="index.php?book_name=1">Book Name</a></th>
                             <th><a href="index.php?author_name=1">Author</a></th>
                             <th><a href="index.php?year=1">Year</a></th>
@@ -90,6 +91,11 @@
                     <tbody>
                     <?php foreach($all_books as $book) { ?>
                         <tr>
+                            <td>
+                            <?php if(isAdmin()) { ?>
+                                <a href="delete_book.php?id=<?php echo $book['book_id']; ?>">D</a>
+                            <?php }; ?>
+                            </td>
                             <td><?php echo $book['book_name']; ?></td>
                             <td><?php echo $book['author_name']; ?></td>
                             <td><?php echo $book['year']; ?></td>
