@@ -5,7 +5,19 @@
         header('location: login.php');
     }
 
-    $all_books = getBooks();
+    if($_GET['book_name'] == 1) {
+        $all_books = sortBooks('books.book_name');
+    } elseif ($_GET['author_name'] == 1) {
+        $all_books = sortBooks('authors.author_name');
+    } elseif ($_GET['year'] == 1) {
+        $all_books = sortBooks('books.year');
+    } elseif ($_GET['genre'] == 1) {
+        $all_books = sortBooks('books.genre');
+    } elseif ($_GET['age_group'] == 1) {
+        $all_books = sortBooks('books.age_group');
+    } else {
+        $all_books = getBooks();
+    }
 ?>
 <!doctype html>
 <html lang="en">
@@ -68,11 +80,11 @@
                 <table class="table table-striped table-sm">
                     <thead>
                         <tr>
-                            <th>Book Name</th>
-                            <th>Author</th>
-                            <th>Year</th>
-                            <th>Genre</th>
-                            <th>Age Group</th>
+                            <th><a href="index.php?book_name=1">Book Name</a></th>
+                            <th><a href="index.php?author_name=1">Author</a></th>
+                            <th><a href="index.php?year=1">Year</a></th>
+                            <th><a href="index.php?genre=1">Genre</a></th>
+                            <th><a href="index.php?age_group=1">Age Group</a></th>
                         </tr>
                     </thead>
                     <tbody>

@@ -243,7 +243,7 @@ function sortBooks($input) {
 		FROM books
 		INNER JOIN authors
 		ON books.author_id = authors.author_id
-		SORT BY "'.$input.'" DESC;';
+		ORDER BY '.$input.';';
 		$books = query($sql);
 		if($books){
 			return $books;
