@@ -69,10 +69,13 @@
                 <h1 class="h2">Library Books</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <form class="d-flex"  method="post" action="index.php">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="book_search_input">
+                        <!-- Create a merged search box with button 
+                            Use icons instead of text for buttons
+                        -->
+                        <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="book_search_input">
                         <button class="btn btn-outline-success" type="submit" name="book_search">Search</button>
                     </form>
-                    <a href="add_book.php"><button class="mx-2 btn btn-outline-primary" type="button" name="book_add">Add</button></a>
+                    <a href="add_book.php"><button class="mx-4 btn btn-primary" type="button" name="book_add">Add</button></a>
                 </div>
             </div>
             <!-- Books Table -->
@@ -81,7 +84,11 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th><a href="index.php?book_name=1">Book Name</a></th>
+                            <!--
+                                1. text decoration to none
+                                2. Color need to be the same as the rest of the text
+                             -->
+                            <th><a class="" href="index.php?book_name=1">Book Name</a></th>
                             <th><a href="index.php?author_name=1">Author</a></th>
                             <th><a href="index.php?year=1">Year</a></th>
                             <th><a href="index.php?genre=1">Genre</a></th>
@@ -93,7 +100,9 @@
                         <tr>
                             <td>
                             <?php if(isAdmin()) { ?>
-                                <a href="delete_book.php?id=<?php echo $book['book_id']; ?>" onclick="return confirm('Are you sure you want to delete this?')">D</a>
+                                <a href="delete_book.php?id=<?php echo $book['book_id']; ?>" onclick="return confirm('Are you sure you want to delete this?')">
+                                <img src="includes/img/remove.png" width="15">
+                                </a>
                             <?php }; ?>
                             </td>
                             <td><?php echo $book['book_name']; ?></td>

@@ -50,10 +50,14 @@ if(!isAdmin()) {
     </nav>
 <div class="container">
     <div class="text-center">
+    <!-- Use another font for headings, double the space from nav 
+        Space with sub heading text spacing.
+    -->
         <h2 class="center">Add New User Account</h2>
         <p class="center">Please fill out this form to create an account.</p>
     </div>
-    <div class="flex-windows p-3 border rounded">
+    <!-- Do a 50% split on the page -->
+    <div class="flex-windows p-3 rounded">
             <div class="user-form-container border-dark p-3">
                 <div class="user-form-div">
                     <?php echo display_error(); ?>
@@ -107,7 +111,11 @@ if(!isAdmin()) {
                             <th scope="row"><?php echo $acc['email']; ?></th>
                             <td><?php echo $acc['user_type']; ?></td>
                             <td><?php echo $acc['timestamp']; ?></td>
-                            <td><a href="delete_member.php?id=<?php echo $acc['id']; ?>" onclick="return confirm('Are you sure?')">D</a></td>
+                            <td>
+                            <a href="delete_member.php?id=<?php echo $acc['id']; ?>" onclick="return confirm('Are you sure?')">
+                                <img src="includes/img/remove.png" width="15">
+                            </a>
+                            </td>
                         </tr>
                     <?php }; ?>
                     </tbody>
