@@ -77,7 +77,16 @@ function getUserById($id){
 // return user array
 function getMembers(){
 	global $mysqli;
-	$query = "SELECT * FROM users";
+	$query = "SELECT * FROM users WHERE user_type = 'user'";
+	$result = query($query);
+
+	return $result;
+}
+
+// return admin array
+function getAdmins(){
+	global $mysqli;
+	$query = "SELECT * FROM users WHERE user_type = 'admin'";
 	$result = query($query);
 
 	return $result;
@@ -248,4 +257,48 @@ function sortBooks($input) {
 		if($books){
 			return $books;
 		}
+}
+
+// Activate and Update User
+function updateUser($id, $firstname, $lastname, $email, $username, $password1, $access_level){
+    if(isset($access_level)) {
+        $password = md5($password1);
+		$sql = 'UPDATE users SET firstname="'.$firstname.'", 
+		lastname="'.$lastname.'", 
+		email="'.$email.'", 
+		username="'.$username.'", 
+		password="'.$password.'", 
+		user_type = "'.$access_level.'" 
+		WHERE id = "'.$id.'"';
+		query($sql);
+		echo $sql;
+        header("location: users.php");
+    } else {
+        $password = md5($password1);
+        $sql = 'UPDATE users SET firstname="'.$firstname.'", 
+		lastname="'.$lastname.'", 
+		email="'.$email.'", 
+		username="'.$username.'", 
+		password="'.$password.'", 
+		user_type = "user" 
+		WHERE id = "'.$id.'"';
+        query($sql);
+        header("location: users.php");
+    }
+    
+}
+
+// Add new member
+function addMember($firstname, $lastname, $email, $username, $user_type, $password1) {
+	$password = md5($password1);
+    $sql = 'INSERT INTO users (firstname, lastname, email, username, user_type, password)
+    VALUES ("'.$firstname.'", 
+    "'.$lastname.'", 
+    "'.$email.'", 
+    "'.$username.'", 
+    "'.$user_type.'", 
+    "'.$password.'")';
+
+    query($sql);
+	header("location: users.php");
 }

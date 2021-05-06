@@ -18,102 +18,70 @@
     } else {
         $all_books = getBooks();
     }
+
+// Include Header
+require('header.php');
 ?>
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <title>Public Library</title>
-
-        <!-- Bootstrap core CSS -->
-        <link href="includes/css/bootstrap.min.css" rel="stylesheet">
-        <!-- Custom styles for this template -->
-        <link href="includes/css/navbar-top-fixed.css" rel="stylesheet">
-    </head>
-<body>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="index.php"><img src="includes/img/logo.svg" height="35"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.php">Home</a>
-                    </li>
-                    <?php if(isAdmin()) { ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="member.php">Members</a>
-                    </li>
-                    <?php }; ?>
-                    <li class="nav-item text-nowrap">
-                        <a class="nav-link" href="index.php?logout='1'">Sign out</a>
-                    </li>
-                </ul>
-                <div class="d-flex text-light">
-                    <?php  if (isset($_SESSION['user'])) { ?>
-                        <strong><?php echo 'Hi, ' . $_SESSION['user']['username']; ?></strong>
-                    <?php }; ?>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <main class="mx-2">
-        <div class="bg-light p-2 rounded">
+    <main class="mx-2 merriweather">
+        <div class="p-2 rounded">
             <!-- Header Elements for Table -->
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Library Books</h1>
-                <div class="btn-toolbar mb-2 mb-md-0">
-                    <form class="d-flex"  method="post" action="index.php">
-                        <!-- Create a merged search box with button 
-                            Use icons instead of text for buttons
-                        -->
+            <div class="d-flex justify-content-sm-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2 mb-2 roboto">Library Books</h1>
+                <div class="d-inline-flex mb-2 me-auto">
+                    <a href="add_book.php"><button class="mx-4 btn btn-primary roboto" type="button" name="book_add">Add</button></a>
+                </div>
+                <div class="btn-toolbar mb-2 mb-md-0 flex-grow-1 mb-2">
+                    <form class="d-flex ms-sm-auto "  method="post" action="index.php">
                         <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="book_search_input">
-                        <button class="btn btn-outline-success" type="submit" name="book_search">Search</button>
+                        <button class="btn btn-outline-success roboto" type="submit" name="book_search">Search</button>
                     </form>
-                    <a href="add_book.php"><button class="mx-4 btn btn-primary" type="button" name="book_add">Add</button></a>
                 </div>
             </div>
             <!-- Books Table -->
-            <div class="table-responsive">
-                <table class="table table-striped table-sm">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <!--
-                                1. text decoration to none
-                                2. Color need to be the same as the rest of the text
-                             -->
-                            <th><a class="" href="index.php?book_name=1">Book Name</a></th>
-                            <th><a href="index.php?author_name=1">Author</a></th>
-                            <th><a href="index.php?year=1">Year</a></th>
-                            <th><a href="index.php?genre=1">Genre</a></th>
-                            <th><a href="index.php?age_group=1">Age Group</a></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach($all_books as $book) { ?>
-                        <tr>
-                            <td>
-                            <?php if(isAdmin()) { ?>
-                                <a href="delete_book.php?id=<?php echo $book['book_id']; ?>" onclick="return confirm('Are you sure you want to delete this?')">
-                                <img src="includes/img/remove.png" width="15">
-                                </a>
-                            <?php }; ?>
-                            </td>
-                            <td><?php echo $book['book_name']; ?></td>
-                            <td><?php echo $book['author_name']; ?></td>
-                            <td><?php echo $book['year']; ?></td>
-                            <td><?php echo $book['genre']; ?></td>
-                            <td><?php echo $book['age_group']; ?></td>
-                        </tr>
-                    <?php }; ?>
-                    </tbody>
-                </table>
+            <div class="d-inline-flex flex-wrap">
+                <div class="d-inline p-2">
+                    <a class="text-decoration-none text-uppercase text-dark fw-bold roboto" href="index.php?book_name=1">Book Name</a>
+                    <img src="includes/img/down-arrow.png" alt="down-arrow" class="" width="15">
+                </div>
+                <div class="d-inline p-2">
+                    <a class="text-decoration-none text-uppercase text-dark fw-bold roboto" href="index.php?author_name=1">Author</a>
+                    <img src="includes/img/down-arrow.png" alt="down-arrow" class="" width="15">
+                </div>
+                <div class="d-inline p-2">
+                    <a class="text-decoration-none text-uppercase text-dark fw-bold roboto" href="index.php?year=1">Year</a>
+                    <img src="includes/img/down-arrow.png" alt="down-arrow" class="" width="15">
+                </div>
+                <div class="d-inline p-2">
+                    <a class="text-decoration-none text-uppercase text-dark fw-bold roboto" href="index.php?genre=1">Genre</a>
+                    <img src="includes/img/down-arrow.png" alt="down-arrow" class="" width="15">
+                </div>
+                <div class="d-inline p-2">
+                    <a class="text-decoration-none text-uppercase text-dark fw-bold roboto" href="index.php?age_group=1">Age Group</a>
+                    <img src="includes/img/down-arrow.png" alt="down-arrow" class="" width="15">
+                </div>
+            </div>
+            <!-- Showmax Style -->
+            <div class="d-inline-flex flex-wrap">
+            <?php foreach($all_books as $book) { ?>
+            <div class="rounded rounded-3 border border-2 border-dark flex-grow-1 m-1 d-inline-flex bg-light">
+                <div class="p-3 flex-grow-1">
+                    <h3 class="text-end roboto"><?php echo $book['book_name']; ?></h3>
+                    <p class="text-end"><?php echo $book['author_name']; ?></p>
+                    <ul class="list-unstyled">
+                        <li class="text-end"><?php echo $book['year']; ?></li>
+                        <li class="text-end"><?php echo $book['genre']; ?></li>
+                        <li class="text-end"><?php echo $book['age_group']; ?></li>
+                    </ul>
+                </div>
+                <div class="flex-shrink-1" style="width: 35px;">
+                <?php if(isAdmin()) { ?>
+                    <a href="delete_book.php?id=<?php echo $book['book_id']; ?>" class="" onclick="return confirm('Want to delete this book?');">
+                        <img src="includes/img/remove.png" alt="delete_icon" class="p-2" width="35">
+                    </a>
+                <?php }; ?>
+                </div>
+                </div>
+            <?php }; ?>
             </div>
         </div>
     </main>
