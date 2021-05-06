@@ -310,3 +310,17 @@ function addMember($firstname, $lastname, $email, $username, $user_type, $passwo
     query($sql);
 	header("location: users.php");
 }
+
+// Get all existing authors
+function getAuthors() {
+	$sql = "SELECT * FROM authors";
+	$results = query($sql);
+	return $results;
+}
+
+// Add book with author
+function addBookAuthor($book_name, $book_year, $book_genre, $age_group, $author_id) {
+	$sql = "INSERT INTO books (book_name, year, genre, age_group, author_id) VALUES ('".$book_name."', '".$book_year."', '".$book_genre."', '".$age_group."', ".$author_id.")";
+	query($sql);
+	header("location: index.php");
+}

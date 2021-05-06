@@ -29,7 +29,7 @@ require('header.php');
                 <h1 class="h2 mb-2 roboto">Library Books</h1>
                 <div class="d-inline-flex mb-2 me-auto">
                 <?php if(isAdmin()) { ?>
-                    <a href="add_book.php"><button class="btn btn-outline-secondary ms-2 roboto" type="button" name="book_add">Add</button></a>
+                    <a href="add_book.php"><button class="btn btn-outline-secondary ms-2 roboto" type="button" name="book_add" @click="clearFormVars">Add</button></a>
                 <?php }; ?>
                 </div>
                 <div class="btn-toolbar mb-2 mb-md-0 flex-grow-1 mb-2">
@@ -87,6 +87,4 @@ require('header.php');
             </div>
         </div>
     </main>
-    <script src="includes/js/bootstrap.bundle.min.js"></script>
-    </body>
-</html>
+    <?php require('footer.php'); ?>

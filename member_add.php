@@ -99,13 +99,13 @@ require('header.php');
                                     <input type="text" class="form-control" id="lastName" placeholder="Example: Muskett-Yetts" name="lastname" v-model="formVars.clientlastname">
                                 </div>
                                 <!-- Email -->
-                                <div class="col-6">
-                                    <label for="email" class="form-label">Email <span class="text-muted">*</span></label>
+                                <div class="col-sm-6">
+                                    <label for="email" class="form-label">Email</label>
                                     <input type="email" class="form-control" id="email" placeholder="Example: donovan@cubeworkspace.co.za" name="email" v-model="formVars.clientemail">
                                 </div>
                                 <!-- Username -->
-                                <div class="col-3">
-                                    <label for="username" class="form-label">Username <span class="text-muted">*</span></label>
+                                <div class="col-sm-3">
+                                    <label for="username" class="form-label">Username</label>
                                     <input type="text" class="form-control" id="username" placeholder="Example: donovan" name="username" v-model="formVars.username">
                                 </div>
                                 <!-- User Type -->
