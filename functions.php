@@ -19,12 +19,20 @@ function register(){
 
 	// receive all input values from the form. Call the e() function
     // defined below to escape form values
+	$firstname   =  e($_POST['firstname']);
+	$lastname    =  e($_POST['lastname']);
 	$username    =  e($_POST['username']);
 	$email       =  e($_POST['email']);
 	$password_1  =  e($_POST['password_1']);
 	$password_2  =  e($_POST['password_2']);
 
 	// form validation: ensure that the form is correctly filled
+	if (empty($firstname)) { 
+		array_push($errors, "Firstname is required"); 
+	}
+	if (empty($lastname)) { 
+		array_push($errors, "Lastname is required"); 
+	}
 	if (empty($username)) { 
 		array_push($errors, "Username is required"); 
 	}
@@ -44,14 +52,14 @@ function register(){
 
 		if (isset($_POST['user_type'])) {
 			$user_type = e($_POST['user_type']);
-			$query = "INSERT INTO users (username, email, user_type, password) 
-					  VALUES('$username', '$email', '$user_type', '$password')";
+			$query = "INSERT INTO users (firstname, lastname, username, email, user_type, password) 
+					  VALUES('$firstname', '$lastname', '$username', '$email', '$user_type', '$password')";
 			mysqli_query($mysqli, $query);
 			$_SESSION['success']  = "New user successfully created!!";
 			header('location: index.php');
 		}else{
-			$query = "INSERT INTO users (username, email, user_type, password) 
-					  VALUES('$username', '$email', 'user', '$password')";
+			$query = "INSERT INTO users (firstname, lastname, username, email, user_type, password) 
+					  VALUES('$firstname', '$lastname', '$username', '$email', 'user', '$password')";
 			mysqli_query($mysqli, $query);
 
 			// get id of the created user

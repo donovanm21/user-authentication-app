@@ -28,9 +28,11 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                     </li>
+                    <?php if(isAdmin()) { ?>
                     <li class="nav-item">
                         <a class="nav-link" href="users.php">Members</a>
                     </li>
+                    <?php }; ?>
                     <li class="nav-item text-nowrap">
                         <a class="nav-link" href="index.php?logout='1'">Sign out</a>
                     </li>

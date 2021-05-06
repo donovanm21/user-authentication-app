@@ -28,7 +28,9 @@ require('header.php');
             <div class="d-flex justify-content-sm-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2 mb-2 roboto">Library Books</h1>
                 <div class="d-inline-flex mb-2 me-auto">
-                    <a href="add_book.php"><button class="mx-4 btn btn-primary roboto" type="button" name="book_add">Add</button></a>
+                <?php if(isAdmin()) { ?>
+                    <a href="add_book.php"><button class="btn btn-outline-secondary ms-2 roboto" type="button" name="book_add">Add</button></a>
+                <?php }; ?>
                 </div>
                 <div class="btn-toolbar mb-2 mb-md-0 flex-grow-1 mb-2">
                     <form class="d-flex ms-sm-auto "  method="post" action="index.php">
