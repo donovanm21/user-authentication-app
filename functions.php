@@ -19,12 +19,20 @@ function register(){
 
 	// receive all input values from the form. Call the e() function
     // defined below to escape form values
+	$firstname   =  e($_POST['firstname']);
+	$lastname    =  e($_POST['lastname']);
 	$username    =  e($_POST['username']);
 	$email       =  e($_POST['email']);
 	$password_1  =  e($_POST['password_1']);
 	$password_2  =  e($_POST['password_2']);
 
 	// form validation: ensure that the form is correctly filled
+	if (empty($firstname)) { 
+		array_push($errors, "Firstname is required"); 
+	}
+	if (empty($lastname)) { 
+		array_push($errors, "Lastname is required"); 
+	}
 	if (empty($username)) { 
 		array_push($errors, "Username is required"); 
 	}
@@ -44,14 +52,14 @@ function register(){
 
 		if (isset($_POST['user_type'])) {
 			$user_type = e($_POST['user_type']);
-			$query = "INSERT INTO users (username, email, user_type, password) 
-					  VALUES('$username', '$email', '$user_type', '$password')";
+			$query = "INSERT INTO users (firstname, lastname, username, email, user_type, password) 
+					  VALUES('$firstname', '$lastname', '$username', '$email', '$user_type', '$password')";
 			mysqli_query($mysqli, $query);
 			$_SESSION['success']  = "New user successfully created!!";
 			header('location: index.php');
 		}else{
-			$query = "INSERT INTO users (username, email, user_type, password) 
-					  VALUES('$username', '$email', 'user', '$password')";
+			$query = "INSERT INTO users (firstname, lastname, username, email, user_type, password) 
+					  VALUES('$firstname', '$lastname', '$username', '$email', 'user', '$password')";
 			mysqli_query($mysqli, $query);
 
 			// get id of the created user
@@ -77,7 +85,16 @@ function getUserById($id){
 // return user array
 function getMembers(){
 	global $mysqli;
-	$query = "SELECT * FROM users";
+	$query = "SELECT * FROM users WHERE user_type = 'user'";
+	$result = query($query);
+
+	return $result;
+}
+
+// return admin array
+function getAdmins(){
+	global $mysqli;
+	$query = "SELECT * FROM users WHERE user_type = 'admin'";
 	$result = query($query);
 
 	return $result;
@@ -248,4 +265,88 @@ function sortBooks($input) {
 		if($books){
 			return $books;
 		}
+}
+
+// Activate and Update User
+function updateUser($id, $firstname, $lastname, $email, $username, $password1, $access_level){
+    if(isset($access_level)) {
+        $password = md5($password1);
+		$sql = 'UPDATE users SET firstname="'.$firstname.'", 
+		lastname="'.$lastname.'", 
+		email="'.$email.'", 
+		username="'.$username.'", 
+		password="'.$password.'", 
+		user_type = "'.$access_level.'" 
+		WHERE id = "'.$id.'"';
+		query($sql);
+		echo $sql;
+        header("location: members.php");
+    } else {
+        $password = md5($password1);
+        $sql = 'UPDATE users SET firstname="'.$firstname.'", 
+		lastname="'.$lastname.'", 
+		email="'.$email.'", 
+		username="'.$username.'", 
+		password="'.$password.'", 
+		user_type = "user" 
+		WHERE id = "'.$id.'"';
+        query($sql);
+        header("location: members.php");
+    }
+    
+}
+
+// Add new member
+function addMember($firstname, $lastname, $email, $username, $user_type, $password1) {
+	$password = md5($password1);
+    $sql = 'INSERT INTO users (firstname, lastname, email, username, user_type, password)
+    VALUES ("'.$firstname.'", 
+    "'.$lastname.'", 
+    "'.$email.'", 
+    "'.$username.'", 
+    "'.$user_type.'", 
+    "'.$password.'")';
+
+    query($sql);
+	header("location: members.php");
+}
+
+// Get all existing authors
+function getAuthors() {
+	$sql = "SELECT * FROM authors";
+	$results = query($sql);
+	return $results;
+}
+
+// Add book with selected author
+function addBookAuthor($book_name, $book_year, $book_genre, $age_group, $author_id) {
+	$sql = "INSERT INTO books (book_name, year, genre, age_group, author_id) VALUES ('".$book_name."', '".$book_year."', '".$book_genre."', '".$age_group."', ".$author_id.")";
+	query($sql);
+	header("location: index.php");
+}
+// Add book with entered author
+function addBookNoAuthor($book_name, $book_year, $book_genre, $age_group, $author_name, $author_age, $author_genre) {
+	$author_sql = "INSERT INTO authors (author_name, age, genre) VALUES ('".$author_name."', '".$author_age."', '".$author_genre."')";
+	query($author_sql);
+	$get_author = "SELECT author_id FROM authors WHERE author_name = '".$author_name."' LIMIT 1";
+	$auth_id = query($get_author);
+	foreach($auth_id as $id) {
+		$author_id = $id['author_id'];
+	}
+	$sql = "INSERT INTO books (book_name, year, genre, age_group, author_id) VALUES ('".$book_name."', '".$book_year."', '".$book_genre."', '".$age_group."', ".$author_id.")";
+	query($sql);
+	header("location: index.php");
+}
+
+// Update Book
+function updateBook($id, $book_name, $book_year, $book_genre, $age_group, $author_id){
+	$sql = 'UPDATE books SET book_name="'.$book_name.'", 
+	year="'.$book_year.'", 
+	genre="'.$book_genre.'", 
+	age_group="'.$age_group.'", 
+	author_id='.$author_id.'
+	WHERE book_id = '.$id.'';
+	query($sql);
+	//echo $sql;
+	header("location: index.php");
 }

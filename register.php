@@ -19,8 +19,16 @@
         <form method="post" action="register.php">
             <h1 class="h3 mb-3 fw-normal">Please Register</h1>
             <div>
+                <label for="firstname" class="visually-hidden">Firstname</label>
+                <input type="text" id="firstname" class="form-control topinput" placeholder="Firstname" name="firstname" value="<?php echo $firstname; ?>">
+            </div>
+            <div>
+                <label for="lastname" class="visually-hidden">Lastname</label>
+                <input type="text" id="username" class="form-control" placeholder="Lastname" name="lastname" value="<?php echo $lastname; ?>">
+            </div>
+            <div>
                 <label for="username" class="visually-hidden">Username</label>
-                <input type="text" id="username" class="form-control topinput" placeholder="Username" name="username" value="<?php echo $username; ?>">
+                <input type="text" id="username" class="form-control" placeholder="Username" name="username" value="<?php echo $username; ?>">
             </div>
             <div>
                 <label for="email" class="visually-hidden">Email</label>

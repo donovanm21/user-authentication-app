@@ -1,4 +1,14 @@
 * { margin: 0px; padding: 0px; }
+/* Custom Fonts */
+.roboto {
+    font-family: 'Roboto', sans-serif;
+}
+.merriweather {
+    font-family: 'Merriweather', serif;
+}
+.bg-color {
+    background-color: #212529;
+}
 .input-group {
 	margin: 10px 0px 10px 0px;
 }
