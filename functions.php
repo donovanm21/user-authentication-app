@@ -279,7 +279,7 @@ function updateUser($id, $firstname, $lastname, $email, $username, $password1, $
 		user_type = "'.$access_level.'" 
 		WHERE id = "'.$id.'"';
 		query($sql);
-		echo $sql;
+		//echo $sql;
         header("location: members.php");
     } else {
         $password = md5($password1);

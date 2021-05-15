@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Mar 25, 2021 at 08:56 AM
+-- Generation Time: May 15, 2021 at 11:14 AM
 -- Server version: 5.7.32
 -- PHP Version: 7.4.12
 
@@ -11,7 +11,7 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
--- Database: `user_auth_app`
+-- Database: `libappdb`
 --
 
 -- --------------------------------------------------------
@@ -64,7 +64,6 @@ INSERT INTO `books` (`book_id`, `book_name`, `year`, `genre`, `age_group`, `auth
 (4, 'Akbarnama', 2011, 'Biography', '18 year olds and above', 2),
 (5, 'The Cognitive Control of Motivation', 1969, 'Psychology', '18 year olds and above', 3),
 (6, 'Stanford Prison Experiment - A simulation study of the psychology of imprisonment', 1972, 'Psychology', '18 year olds and above', 3),
-(7, 'Influencing Attitudes and Changing Behavior', 1969, 'Psychology', '18 year olds and above', 3),
 (8, 'Sense and Sensibility', 1811, 'Novel', '12 year olds and above', 4),
 (9, 'Pride and Prejudice', 1812, 'Novel', '14 year olds and above', 4),
 (10, 'Mansfield Park', 1814, 'Novel', 'Adult Fiction', 4),
@@ -73,8 +72,7 @@ INSERT INTO `books` (`book_id`, `book_name`, `year`, `genre`, `age_group`, `auth
 (13, 'Persuasion', 1818, 'Novel', 'Adult Fiction', 4),
 (14, 'Lady Susan', 1871, 'Novel', 'Adult Fiction', 4),
 (15, 'The Childhood of Jesus', 2013, 'Novel', '12 to 15 year olds', 5),
-(16, 'The Schooldays of Jesus', 2016, 'Novel', '8 to 10 year olds', 5),
-(17, 'The Death of Jesus', 2019, 'Novel', '12 to 17 year olds', 5);
+(16, 'The Schooldays of Jesus', 2016, 'Novel', '8 to 10 year olds', 5);
 
 -- --------------------------------------------------------
 
@@ -84,18 +82,22 @@ INSERT INTO `books` (`book_id`, `book_name`, `year`, `genre`, `age_group`, `auth
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `username` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `user_type` varchar(255) NOT NULL,
-  `password` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `firstname` varchar(255) NOT NULL,
+  `lastname` varchar(255) NOT NULL,
+  `username` varchar(100) CHARACTER SET latin1 NOT NULL,
+  `email` varchar(100) CHARACTER SET latin1 NOT NULL,
+  `user_type` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `password` varchar(100) CHARACTER SET latin1 NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `user_type`, `password`) VALUES
-(1, 'admin', 'admin@example.com', 'admin', '21232f297a57a5a743894a0e4a801fc3');
+INSERT INTO `users` (`id`, `firstname`, `lastname`, `username`, `email`, `user_type`, `password`, `timestamp`) VALUES
+(1, 'Sys', 'Admin', 'admin', 'admin@example.com', 'admin', '21232f297a57a5a743894a0e4a801fc3', '2021-05-06 07:58:13'),
+(11, 'John', 'Doe', 'john', 'john@doe.com', 'user', '7c6a180b36896a0a8c02787eeafb0e4c', '2021-05-15 10:47:48');
 
 --
 -- Indexes for dumped tables
@@ -128,19 +130,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `authors`
 --
 ALTER TABLE `authors`
-  MODIFY `author_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `author_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `books`
 --
 ALTER TABLE `books`
-  MODIFY `book_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `book_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables
