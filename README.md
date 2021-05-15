@@ -19,3 +19,7 @@ $DBNAME = 'librarydb'; // Name of database you using for the app
 4. Visit the site and login with the below default details
 
 Default login details admin / admin
+
+# Check out the demo site below.
+
+https://library-app.ydev.co.za
