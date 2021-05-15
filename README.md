@@ -1,15 +1,21 @@
-# Boiler Plate User Authentication System
+# Application Setup
 
-Default login details admin / admin
+1. Setup a MySQL Database & Import the sample database
 
-Import the auth_user_app.sql in MySQL 
+Import the databse.sql in MySQL 
 
-Change the below variables in function.php with your database server details.
+2. Copy config-new.php to config.php and update the below in config.php
 
 ```php
 // Database Host Details
-$DBSERVER = 'localhost'; // Hostname for the MySQL server
-$DBUSER = 'root'; // Username to access MySQL
-$DBPASS = 'root'; // Password to access MySQL
-$DBNAME = 'user_auth_app'; // Name of database you using for the app
+$DBSERVER = 'server host name'; // Hostname for the MySQL server
+$DBUSER = 'username'; // Username to access MySQL
+$DBPASS = 'password'; // Password to access MySQL
+$DBNAME = 'librarydb'; // Name of database you using for the app
 ```
+
+3. Copy all the files to your ftp / web server root folder
+
+4. Visit the site and login with the below default details
+
+Default login details admin / admin
