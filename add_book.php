@@ -35,17 +35,18 @@ if(isset($_POST['add_book'])) {
                 e($_POST['select_author'])
             );
         } else {
-            /*addBook(
-                e($_POST['book_name']),
-                e($_POST['book_year']),
-                e($_POST['book_genre']),
-                e($_POST['age_group']),
-                e($_POST['author_name']),
-                e($_POST['author_age']),
-                e($_POST['author_genre'])
-            );*/
+            if(isset($_POST['author_name']) && isset($_POST['author_age']) && isset($_POST['author_genre'])) {
+                addBookNoAuthor(
+                    e($_POST['book_name']),
+                    e($_POST['book_year']),
+                    e($_POST['book_genre']),
+                    e($_POST['age_group']),
+                    e($_POST['author_name']),
+                    e($_POST['author_age']),
+                    e($_POST['author_genre'])
+                );
+            }
         }
-        
     }
 }
 

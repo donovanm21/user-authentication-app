@@ -66,10 +66,10 @@ require('header.php');
                 </div>
                 <div class="flex-shrink-1" style="width: 35px;">
                 <?php if(isAdmin()) { ?>
-                    <a href="delete_member.php?id=<?php echo $u['id']; ?>" class="" onclick="return confirm('Want to delete this user?');">
+                    <a href="member_delete.php?id=<?php echo $u['id']; ?>" class="" onclick="return confirm('Want to delete this user?');">
                         <img src="includes/img/remove.png" alt="delete_icon" class="p-2" width="35">
                     </a>
-                    <a href="core_users_edit.php?id=<?php echo $u['id']; ?>" class="">
+                    <a href="member_edit.php?id=<?php echo $u['id']; ?>" class="">
                         <img class="p-2" src="includes/img/edit.png" width="35">
                     </a>
                     <a href="member_amend.php?id=<?php echo $u['id']; ?>&demote=1" class="" onclick="return confirm('Want to demote user?');">
@@ -96,10 +96,10 @@ require('header.php');
                 </div>
                 <div class="flex-shrink-1" style="width: 35px;">
                 <?php if(isAdmin()) { ?>
-                    <a href="delete_member.php?id=<?php echo $b['id']; ?>" class="" onclick="return confirm('Want to delete this user?');">
+                    <a href="member_delete.php?id=<?php echo $b['id']; ?>" class="" onclick="return confirm('Want to delete this user?');">
                         <img src="includes/img/remove.png" alt="delete_icon" class="p-2" width="35">
                     </a>
-                    <a href="core_users_edit.php?id=<?php echo $b['id']; ?>" class="">
+                    <a href="member_edit.php?id=<?php echo $b['id']; ?>" class="">
                         <img class="p-2" src="includes/img/edit.png" width="35">
                     </a>
                     <a href="member_amend.php?id=<?php echo $b['id']; ?>&promote=1" class="" onclick="return confirm('Want to promote user?');">

@@ -30,7 +30,7 @@
                     </li>
                     <?php if(isAdmin()) { ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="users.php">Members</a>
+                        <a class="nav-link" href="members.php">Members</a>
                     </li>
                     <?php }; ?>
                     <li class="nav-item text-nowrap">

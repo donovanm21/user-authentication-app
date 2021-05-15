@@ -280,7 +280,7 @@ function updateUser($id, $firstname, $lastname, $email, $username, $password1, $
 		WHERE id = "'.$id.'"';
 		query($sql);
 		echo $sql;
-        header("location: users.php");
+        header("location: members.php");
     } else {
         $password = md5($password1);
         $sql = 'UPDATE users SET firstname="'.$firstname.'", 
@@ -291,7 +291,7 @@ function updateUser($id, $firstname, $lastname, $email, $username, $password1, $
 		user_type = "user" 
 		WHERE id = "'.$id.'"';
         query($sql);
-        header("location: users.php");
+        header("location: members.php");
     }
     
 }
@@ -308,7 +308,7 @@ function addMember($firstname, $lastname, $email, $username, $user_type, $passwo
     "'.$password.'")';
 
     query($sql);
-	header("location: users.php");
+	header("location: members.php");
 }
 
 // Get all existing authors
@@ -318,8 +318,21 @@ function getAuthors() {
 	return $results;
 }
 
-// Add book with author
+// Add book with selected author
 function addBookAuthor($book_name, $book_year, $book_genre, $age_group, $author_id) {
+	$sql = "INSERT INTO books (book_name, year, genre, age_group, author_id) VALUES ('".$book_name."', '".$book_year."', '".$book_genre."', '".$age_group."', ".$author_id.")";
+	query($sql);
+	header("location: index.php");
+}
+// Add book with entered author
+function addBookNoAuthor($book_name, $book_year, $book_genre, $age_group, $author_name, $author_age, $author_genre) {
+	$author_sql = "INSERT INTO authors (author_name, age, genre) VALUES ('".$author_name."', '".$author_age."', '".$author_genre."')";
+	query($author_sql);
+	$get_author = "SELECT author_id FROM authors WHERE author_name = '".$author_name."' LIMIT 1";
+	$auth_id = query($get_author);
+	foreach($auth_id as $id) {
+		$author_id = $id['author_id'];
+	}
 	$sql = "INSERT INTO books (book_name, year, genre, age_group, author_id) VALUES ('".$book_name."', '".$book_year."', '".$book_genre."', '".$age_group."', ".$author_id.")";
 	query($sql);
 	header("location: index.php");

@@ -131,7 +131,7 @@ require('header.php');
                             <hr class="my-4">
 
                             <button class="w-100 btn btn-primary btn-lg" type="submit" name="add_submit" @click="memberFormSubmit">Add Member</button>
-                            <a href="users.php"><button class="w-100 btn btn-secondary btn-lg my-2" type="button">Back</button></a>
+                            <a href="members.php"><button class="w-100 btn btn-secondary btn-lg my-2" type="button">Back</button></a>
                             </form>
                         </div>
                     </div>

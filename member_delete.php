@@ -10,7 +10,7 @@ if (!isLoggedIn()) {
 if(isset($_GET['id'])) {
     $sql = 'DELETE FROM users WHERE id = "'.$_GET['id'].'"';
     query($sql);
-    header("location: users.php");
+    header("location: members.php");
 }
 
 ?>
