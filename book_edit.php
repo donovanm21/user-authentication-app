@@ -9,8 +9,18 @@ $authors = getAuthors();
 // Error Array
 $errors = array();
 
-// Add New Book
-if(isset($_POST['add_book'])) {
+if(!isset($_GET['book_id'])) {
+    $book_id = $_POST['book_id'];
+} else {
+    $book_id = $_GET['book_id'];
+}
+
+$book_info = query('SELECT *
+FROM books
+WHERE book_id = "'.$book_id.'"');
+
+// Update Book Info
+if(isset($_POST['update_book'])) {
     // Form validation
     if($_POST['book_name'] == '') {
         array_push($errors, 'Please enter a valid book name.');
@@ -24,10 +34,11 @@ if(isset($_POST['add_book'])) {
     if($_POST['age_group'] == '') {
         array_push($errors, 'Please enter a valid age group.');
     }
-    // Add Client to Database
+    // Update Book
     if(count($errors) == 0) {
         if($_POST['select_author'] != '') {
-            addBookAuthor(
+            updateBook(
+                e($_POST['book_id']),
                 e($_POST['book_name']),
                 e($_POST['book_year']),
                 e($_POST['book_genre']),
@@ -35,17 +46,7 @@ if(isset($_POST['add_book'])) {
                 e($_POST['select_author'])
             );
         } else {
-            if(isset($_POST['author_name']) && isset($_POST['author_age']) && isset($_POST['author_genre'])) {
-                addBookNoAuthor(
-                    e($_POST['book_name']),
-                    e($_POST['book_year']),
-                    e($_POST['book_genre']),
-                    e($_POST['age_group']),
-                    e($_POST['author_name']),
-                    e($_POST['author_age']),
-                    e($_POST['author_genre'])
-                );
-            }
+            array_push($errors, 'Please select an author.');
         }
     }
 }
@@ -73,29 +74,32 @@ require('header.php');
                 <div class="">
                     <!-- Add Client Form -->
                     <div class="row g-3 mt-2">
-                        <div class="col-md-12 col-lg-12" v-if="membertype == 'client'">
-                            <h4 class="mb-3">Add New Book</h4>
-                            <form class="needs-validation" action="add_book.php" method="post">
+                        <div class="col-md-12 col-lg-12">
+                            <h4 class="mb-3">Update Book</h4>
+                            <form class="needs-validation" action="book_edit.php" method="post">
+                            <?php foreach($book_info as $bi) { ?>
                             <div class="row g-3">
+                                <!-- Book ID -->
+                                <input type="hidden" value="<?php echo $book_id; ?>" name="book_id">
                                 <!-- Book Name -->
                                 <div class="col-6">
                                     <label for="book_name" class="form-label">Book Name / Title</label>
-                                    <input type="text" class="form-control" id="book_name" placeholder="Example: Book Name" name="book_name" v-model="formVars.bookname">
+                                    <input type="text" class="form-control" id="book_name" placeholder="Example: Book Name" name="book_name" value="<?php echo $bi['book_name']; ?>">
                                 </div>
                                 <!-- Book Year -->
                                 <div class="col-6">
                                     <label for="book_year" class="form-label">Book Year</label>
-                                    <input type="text" class="form-control" id="book_year" placeholder="Example: 1982" name="book_year" v-model="formVars.bookyear">
+                                    <input type="text" class="form-control" id="book_year" placeholder="Example: 1982" name="book_year" value="<?php echo $bi['year']; ?>">
                                 </div>
                                 <!-- Book Genre -->
                                 <div class="col-sm-6">
                                     <label for="book_genre" class="form-label">Book Genre</label>
-                                    <input type="text" class="form-control" id="book_genre" placeholder="Example: Novel" name="book_genre" v-model="formVars.bookgenre">
+                                    <input type="text" class="form-control" id="book_genre" placeholder="Example: Novel" name="book_genre" value="<?php echo $bi['genre']; ?>">
                                 </div>
                                 <!-- Age Group -->
                                 <div class="col-sm-6">
                                     <label for="age_group" class="form-label">Age Group</label>
-                                    <input type="text" class="form-control" id="age_group" placeholder="Example: 16 - 18yrs" name="age_group" v-model="formVars.agegroup">
+                                    <input type="text" class="form-control" id="age_group" placeholder="Example: 16 - 18yrs" name="age_group" value="<?php echo $bi['age_group']; ?>">
                                 </div>
                                 <!-- Select Author -->
                                 <div class="col-md-6">
@@ -107,31 +111,11 @@ require('header.php');
                                         <?php } ?>
                                     </select>
                                 </div>
-                                <!-- Spacer -->
-                                <div class="col-md-6"></div>
-                                <!-- Spacer -->
-                                <div class="col-12">
-                                    <span><b>OR</b></span>
-                                </div>
-                                <!-- Author Name -->
-                                <div class="col-sm-6">
-                                    <label for="author_name" class="form-label">Author Name</label>
-                                    <input type="text" class="form-control" id="author_name" placeholder="Example: Vikram" name="author_name">
-                                </div>
-                                <!-- Author Age -->
-                                <div class="col-sm-6">
-                                    <label for="author_age" class="form-label">Author Age</label>
-                                    <input type="text" class="form-control" id="author_age" placeholder="Example: 67" name="author_age">
-                                </div>
-                                <!-- Author Genre -->
-                                <div class="col-sm-6">
-                                    <label for="author_genre" class="form-label">Author Genre</label>
-                                    <input type="text" class="form-control" id="author_genre" placeholder="Example: Novelist" name="author_genre">
-                                </div>
                             </div>
+                            <?php } ?>
                             <hr class="my-4">
 
-                            <button class="w-100 btn btn-primary btn-lg" type="submit" name="add_book" @click="memberFormSubmit">Add New Book</button>
+                            <button class="w-100 btn btn-primary btn-lg" type="submit" name="update_book">Update Book</button>
                             <a href="index.php"><button class="w-100 btn btn-secondary btn-lg my-2" type="button">Back</button></a>
                             </form>
                         </div>

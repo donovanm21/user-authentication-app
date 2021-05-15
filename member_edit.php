@@ -101,7 +101,7 @@ require('header.php');
                 <div class="row g-3">
                 <div class="col-md-12 col-lg-12">
                     <h4 class="mb-3"></h4>
-                    <form class="needs-validation" action="core_users_edit.php" method="post">
+                    <form class="needs-validation" action="member_edit.php" method="post">
                     <?php foreach($user_info as $ci) { ?>
                     <div class="row g-3">
                         

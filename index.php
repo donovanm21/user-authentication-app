@@ -77,8 +77,13 @@ require('header.php');
                 </div>
                 <div class="flex-shrink-1" style="width: 35px;">
                 <?php if(isAdmin()) { ?>
+                    <!-- Book Delete -->
                     <a href="book_delete.php?id=<?php echo $book['book_id']; ?>" class="" onclick="return confirm('Want to delete this book?');">
                         <img src="includes/img/remove.png" alt="delete_icon" class="p-2" width="35">
+                    </a>
+                    <!-- Book Edit -->
+                    <a href="book_edit.php?book_id=<?php echo $book['book_id']; ?>" class="">
+                        <img class="p-2" src="includes/img/edit.png" width="35">
                     </a>
                 <?php }; ?>
                 </div>

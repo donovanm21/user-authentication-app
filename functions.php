@@ -337,3 +337,16 @@ function addBookNoAuthor($book_name, $book_year, $book_genre, $age_group, $autho
 	query($sql);
 	header("location: index.php");
 }
+
+// Update Book
+function updateBook($id, $book_name, $book_year, $book_genre, $age_group, $author_id){
+	$sql = 'UPDATE books SET book_name="'.$book_name.'", 
+	year="'.$book_year.'", 
+	genre="'.$book_genre.'", 
+	age_group="'.$age_group.'", 
+	author_id='.$author_id.'
+	WHERE book_id = '.$id.'';
+	query($sql);
+	//echo $sql;
+	header("location: index.php");
+}

@@ -75,7 +75,7 @@ require('header.php');
                     <div class="row g-3 mt-2">
                         <div class="col-md-12 col-lg-12" v-if="membertype == 'client'">
                             <h4 class="mb-3">Add New Book</h4>
-                            <form class="needs-validation" action="add_book.php" method="post">
+                            <form class="needs-validation" action="book_add.php" method="post">
                             <div class="row g-3">
                                 <!-- Book Name -->
                                 <div class="col-6">
