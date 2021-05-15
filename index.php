@@ -29,7 +29,7 @@ require('header.php');
                 <h1 class="h2 mb-2 roboto">Library Books</h1>
                 <div class="d-inline-flex mb-2 me-auto">
                 <?php if(isAdmin()) { ?>
-                    <a href="add_book.php"><button class="btn btn-outline-secondary ms-2 roboto" type="button" name="book_add" @click="clearFormVars">Add</button></a>
+                    <a href="book_add.php"><button class="btn btn-outline-secondary ms-2 roboto" type="button" name="book_add" @click="clearFormVars">Add</button></a>
                 <?php }; ?>
                 </div>
                 <div class="btn-toolbar mb-2 mb-md-0 flex-grow-1 mb-2">
@@ -77,7 +77,7 @@ require('header.php');
                 </div>
                 <div class="flex-shrink-1" style="width: 35px;">
                 <?php if(isAdmin()) { ?>
-                    <a href="delete_book.php?id=<?php echo $book['book_id']; ?>" class="" onclick="return confirm('Want to delete this book?');">
+                    <a href="book_delete.php?id=<?php echo $book['book_id']; ?>" class="" onclick="return confirm('Want to delete this book?');">
                         <img src="includes/img/remove.png" alt="delete_icon" class="p-2" width="35">
                     </a>
                 <?php }; ?>
